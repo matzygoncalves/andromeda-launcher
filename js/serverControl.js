@@ -238,6 +238,41 @@ async function stopAllServers() {
     showToast('✅ Todos os servidores parados!', 'success');
 }
 
+// Função para abrir todos os servidores no navegador
+async function openAllServers() {
+    showToast('🌐 Abrindo todos os servidores no navegador...', 'info');
+    
+    try {
+        if (backendStatus) {
+            await openBackendInNewTab();
+        }
+        
+        if (frontendStatus) {
+            await openFrontendInNewTab();
+        }
+        
+        if (!backendStatus && !frontendStatus) {
+            showToast('⚠️ Nenhum servidor está rodando', 'warning');
+        } else {
+            showToast('✅ Todos os servidores abertos no navegador!', 'success');
+        }
+    } catch (error) {
+        showToast('❌ Erro ao abrir servidores: ' + error.message, 'error');
+    }
+}
+
+// Função para fechar todos os servidores
+async function closeAllServers() {
+    showToast('❌ Fechando todos os servidores...', 'info');
+    
+    try {
+        await stopAllServers();
+        showToast('✅ Todos os servidores fechados!', 'success');
+    } catch (error) {
+        showToast('❌ Erro ao fechar servidores: ' + error.message, 'error');
+    }
+}
+
 // Exportar funções para uso global
 window.startBackendServer = startBackendServer;
 window.stopBackendServer = stopBackendServer;
@@ -248,6 +283,8 @@ window.openFrontendInNewTab = openFrontendInNewTab;
 window.openBackendInNewTab = openBackendInNewTab;
 window.startAllServers = startAllServers;
 window.stopAllServers = stopAllServers;
+window.openAllServers = openAllServers;
+window.closeAllServers = closeAllServers;
 
 // Verificar status inicial quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
