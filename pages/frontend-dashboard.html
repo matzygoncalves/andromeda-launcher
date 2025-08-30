@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Dashboard - Andromeda Galaxy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+                🌐 React Frontend
+            </h1>
+            <p class="text-xl text-gray-300">Painel de Controle do Frontend</p>
+        </div>
+
+        <!-- Quick Actions Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="glass-effect rounded-xl p-6 text-center card-hover">
+                <div class="text-4xl mb-3 text-blue-400">⚡</div>
+                <h3 class="text-lg font-semibold mb-2">Status Vite</h3>
+                <p class="text-sm text-gray-300">Verificar se está rodando</p>
+            </div>
+            
+            <div class="glass-effect rounded-xl p-6 text-center card-hover">
+                <div class="text-4xl mb-3 text-cyan-400">🔧</div>
+                <h3 class="text-lg font-semibold mb-2">Build</h3>
+                <p class="text-sm text-gray-300">Compilar projeto</p>
+            </div>
+            
+            <div class="glass-effect rounded-xl p-6 text-center card-hover">
+                <div class="text-4xl mb-3 text-purple-400">📦</div>
+                <h3 class="text-lg font-semibold mb-2">Dependências</h3>
+                <p class="text-sm text-gray-300">Gerenciar pacotes</p>
+            </div>
+            
+            <div class="glass-effect rounded-xl p-6 text-center card-hover">
+                <div class="text-4xl mb-3 text-green-400">🚀</div>
+                <h3 class="text-lg font-semibold mb-2">Deploy</h3>
+                <p class="text-sm text-gray-300">Publicar aplicação</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-6xl mx-auto">
+            <!-- Vite Development Server Section -->
+            <div class="glass-effect rounded-xl p-8 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <div class="text-3xl mr-4">⚡</div>
+                        <div>
+                            <h2 class="text-2xl font-bold">Servidor de Desenvolvimento Vite</h2>
+                            <p class="text-gray-300">Iniciar e gerenciar o servidor de desenvolvimento</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">Status do Servidor</h4>
+                            <div class="text-sm text-yellow-400">
+                                ⏳ Verificando...
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">URL do Servidor</h4>
+                            <div class="text-sm text-blue-400">
+                                http://localhost:5173
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold mb-3">Comandos Manuais</h3>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">Iniciar servidor:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-blue-400 text-sm font-mono">
+                                npm run dev
+                            </code>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">Build de produção:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-blue-400 text-sm font-mono">
+                                npm run build
+                            </code>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">Preview build:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-blue-400 text-sm font-mono">
+                                npm run preview
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- React Components Section -->
+            <div class="glass-effect rounded-xl p-8 mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="text-3xl mr-4">⚛️</div>
+                    <div>
+                        <h2 class="text-2xl font-bold">Componentes React</h2>
+                        <p class="text-gray-300">Gerenciar componentes e estado da aplicação</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-gray-900 rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">📊</div>
+                        <h4 class="font-semibold mb-2">Dashboard</h4>
+                        <p class="text-sm text-gray-400">Componente principal</p>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">💰</div>
+                        <h4 class="font-semibold mb-2">Financeiro</h4>
+                        <p class="text-sm text-gray-400">Gestão financeira</p>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">👥</div>
+                        <h4 class="font-semibold mb-2">Usuários</h4>
+                        <p class="text-sm text-gray-400">Gestão de usuários</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TypeScript Configuration Section -->
+            <div class="glass-effect rounded-xl p-8">
+                <div class="flex items-center mb-6">
+                    <div class="text-3xl mr-4">🔷</div>
+                    <div>
+                        <h2 class="text-2xl font-bold">Configuração TypeScript</h2>
+                        <p class="text-gray-300">Configurações e tipos do projeto</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold mb-3">Arquivos de Configuração</h3>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">tsconfig.json:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-blue-400 text-sm font-mono">
+                                Configuração TypeScript
+                            </code>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">vite.config.ts:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-blue-400 text-sm font-mono">
+                                Configuração Vite
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold mb-3">Dependências</h3>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">React + Vite:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-blue-400 text-sm font-mono">
+                                react, react-dom, vite
+                            </code>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">TypeScript:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-blue-400 text-sm font-mono">
+                                typescript, @types/react
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-12 text-center text-gray-400 text-sm">
+            <p>Andromeda Galaxy - Frontend Dashboard</p>
+            <p class="mt-1">React + Vite + TypeScript</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andromeda Launcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <!-- Toast Container -->
+            <div id="toastContainer"></div>
+        <button onclick="clearAllToasts()" 
+                class="fixed top-4 left-4 z-50 bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg text-sm transition-colors duration-200 opacity-70 hover:opacity-100">
+            🧹 Limpar Toasts
+        </button>
+
+    <!-- Main Dashboard Page -->
+    <div id="mainPage" class="page active">
+        <div class="container mx-auto px-4 py-8">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    🚀 Andromeda Galaxy
+                </h1>
+                <p class="text-xl text-gray-300">Launcher do Sistema Financeiro</p>
+            </div>
+
+
+
+            <!-- Navigation Menu -->
+            <div class="max-w-6xl mx-auto mb-8">
+                <div class="glass-effect rounded-xl p-8">
+                    <h2 class="text-3xl font-bold mb-6 text-center">Menu de Navegação</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <button onclick="showBackendDashboard()" 
+                                class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            <div class="text-3xl mb-2">🐍</div>
+                            <div>Backend Dashboard</div>
+                            <div class="text-sm opacity-80">Django + Python</div>
+                        </button>
+                        
+                        <button onclick="showFrontendDashboard()" 
+                                class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            <div class="text-3xl mb-2">🌐</div>
+                            <div>Frontend Dashboard</div>
+                            <div class="text-sm opacity-80">React + Vite</div>
+                        </button>
+                        
+                        <button onclick="showSystemStatus()" 
+                                class="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            <div class="text-3xl mb-2">📊</div>
+                            <div>Status do Sistema</div>
+                            <div class="text-sm opacity-80">Monitoramento</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Server Control Section -->
+            <div class="max-w-6xl mx-auto mb-8">
+                <div class="glass-effect rounded-xl p-8">
+                    <h2 class="text-3xl font-bold mb-6 text-center">🎮 Controle dos Servidores</h2>
+                    
+                    <!-- Backend Django Section -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="text-3xl mr-4">🐍</div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Backend Django</h3>
+                                    <p class="text-gray-300">Servidor Python - Porta 8000</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span id="backendStatus" class="text-lg">🔴 Offline</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 mb-4">
+                            <button id="startBackendBtn" onclick="startBackendServer()" 
+                                    class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                                🚀 Iniciar Backend
+                            </button>
+                            
+                            <button id="stopBackendBtn" onclick="stopBackendServer()" 
+                                    class="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                                🛑 Parar Backend
+                            </button>
+                            
+                            <button onclick="openBackendInNewTab()" 
+                                    class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                                🌐 Abrir Backend
+                            </button>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">Comando executado:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-blue-400 text-sm font-mono">
+                                ./venv/Scripts/python.exe manage.py runserver
+                            </code>
+                            <p class="text-xs text-gray-500 mt-2">Diretório: C:\Users\matzy\OneDrive\Área de Trabalho\Andrômeda Galaxy\andromeda-engine</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Frontend React Section -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="text-3xl mr-4">🌐</div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Frontend React</h3>
+                                    <p class="text-gray-300">Servidor Vite - Porta 5173</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span id="frontendStatus" class="text-lg">🔴 Offline</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 mb-4">
+                            <button id="startFrontendBtn" onclick="startFrontendDev()" 
+                                    class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                                🚀 Iniciar Frontend
+                            </button>
+                            
+                            <button id="stopFrontendBtn" onclick="stopFrontendDev()" 
+                                    class="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                                🛑 Parar Frontend
+                            </button>
+                            
+                            <button onclick="openFrontendInNewTab()" 
+                                    class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                                🌐 Abrir Frontend
+                            </button>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">Comando executado:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-blue-400 text-sm font-mono">
+                                npm run dev
+                            </code>
+                            <p class="text-xs text-gray-500 mt-2">Diretório: C:\Users\matzy\OneDrive\Área de Trabalho\Andrômeda Galaxy\andromeda-web</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="flex justify-center gap-4">
+                        <button onclick="startAllServers()" 
+                                class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            🚀 Iniciar Todos
+                        </button>
+                        
+                        <button onclick="stopAllServers()" 
+                                class="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            🛑 Parar Todos
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div class="max-w-4xl mx-auto mt-8 text-center text-gray-400 text-sm">
+                <p>Andromeda Galaxy - Sistema de Gestão Financeira</p>
+                <p class="mt-1">Desenvolvido com Electron + Django + React</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backend Dashboard Page -->
+    <div id="backendPage" class="page">
+        <div class="container mx-auto px-4 py-8">
+            <!-- Header with Back Button -->
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent">
+                        🐍 Django Backend
+                    </h1>
+                    <p class="text-xl text-gray-300">Painel de Controle do Sistema</p>
+                </div>
+                <button onclick="showMainPage()" 
+                        class="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                    ← Voltar ao Dashboard
+                </button>
+            </div>
+            
+            <!-- Backend Dashboard Content -->
+            <div class="w-full h-screen">
+                <iframe src="pages/backend-dashboard.html" 
+                        class="w-full h-full border-0 rounded-lg"
+                        style="min-height: 800px;">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Frontend Dashboard Page -->
+    <div id="frontendPage" class="page">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+                        🌐 Frontend Dashboard
+                    </h1>
+                    <p class="text-xl text-gray-300">React + Vite + TypeScript</p>
+                </div>
+                <button onclick="showMainPage()" 
+                        class="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                    ← Voltar ao Dashboard
+                </button>
+            </div>
+            
+            <!-- Frontend Dashboard Content -->
+            <div class="w-full h-screen">
+                <iframe src="pages/frontend-dashboard.html" 
+                        class="w-full h-full border-0 rounded-lg"
+                        style="min-height: 800px;">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Status Page -->
+    <div id="statusPage" class="page">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                        📊 Status do Sistema
+                    </h1>
+                    <p class="text-xl text-gray-300">Monitoramento em tempo real</p>
+                </div>
+                <button onclick="showMainPage()" 
+                        class="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                    ← Voltar ao Dashboard
+                </button>
+            </div>
+            
+            <!-- System Status Content -->
+            <div class="w-full h-screen">
+                <iframe src="pages/system-status.html" 
+                        class="w-full h-full border-0 rounded-lg"
+                        style="min-height: 800px;">
+                </iframe>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/serverControl.js"></script>
+    <script src="renderer.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,17 @@
+{
+  "name": "andromeda-launcher",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "start:test": "electron . --main=test-main.js",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "electron": "^28.0.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^26.0.12",
+    "tailwindcss": "^4.1.12"
+  }
+}

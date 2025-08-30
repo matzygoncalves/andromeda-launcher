@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Dashboard - Andromeda Galaxy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent">
+                🐍 Django Backend
+            </h1>
+            <p class="text-xl text-gray-300">Painel de Controle do Sistema</p>
+        </div>
+
+        <!-- Quick Actions Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="glass-effect rounded-xl p-6 text-center card-hover">
+                <div class="text-4xl mb-3 text-emerald-400">⚡</div>
+                <h3 class="text-lg font-semibold mb-2">Status Servidor</h3>
+                <p class="text-sm text-gray-300">Verificar se está rodando</p>
+            </div>
+            
+            <div class="glass-effect rounded-xl p-6 text-center card-hover">
+                <div class="text-4xl mb-3 text-blue-400">👑</div>
+                <h3 class="text-lg font-semibold mb-2">Superusuário</h3>
+                <p class="text-sm text-gray-300">Criar admin</p>
+            </div>
+            
+            <div class="glass-effect rounded-xl p-6 text-center card-hover">
+                <div class="text-4xl mb-3 text-purple-400">🗄️</div>
+                <h3 class="text-lg font-semibold mb-2">Banco de Dados</h3>
+                <p class="text-sm text-gray-300">Gerenciar dados</p>
+            </div>
+            
+            <div class="glass-effect rounded-xl p-6 text-center card-hover">
+                <div class="text-4xl mb-3 text-yellow-400">📊</div>
+                <h3 class="text-lg font-semibold mb-2">Logs</h3>
+                <p class="text-sm text-gray-300">Ver histórico</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-6xl mx-auto">
+            <!-- Superusuário Section -->
+            <div class="glass-effect rounded-xl p-8 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                    <div class="text-3xl mr-4">👑</div>
+                    <div>
+                            <h2 class="text-2xl font-bold">Gerenciar Superusuários</h2>
+                            <p class="text-gray-300">Criar e gerenciar superusuários do Django</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-bug mr-2"></i>Debug
+                        </button>
+                        <button class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-sync-alt mr-2"></i>Atualizar Lista
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Form Section -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Username</label>
+                            <input type="text" id="username" placeholder="admin" 
+                                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="email" placeholder="admin@andromeda.com" 
+                                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Senha</label>
+                            <input type="password" id="password" placeholder="••••••••" 
+                                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white">
+                        </div>
+                        
+                        <button class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-crown mr-2"></i>Criar Superusuário
+                        </button>
+                    </div>
+                    
+                    <!-- Commands Section -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold mb-3">Comandos Manuais</h3>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">Criar superusuário:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-emerald-400 text-sm font-mono">
+                                python manage.py createsuperuser
+                            </code>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">Com dados específicos:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-emerald-400 text-sm font-mono">
+                                python manage.py createsuperuser --username admin --email admin@andromeda.com
+                            </code>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <p class="text-sm text-gray-400 mb-2">Ver usuários no shell:</p>
+                            <code class="block bg-gray-800 p-3 rounded text-emerald-400 text-sm font-mono">
+                                python manage.py shell<br>
+                                from accounts.models import User<br>
+                                User.objects.all()<br>
+                                exit()
+                            </code>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista de Superusuários Existentes -->
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold mb-4">Superusuários Existentes</h3>
+                    <div id="superusersList" class="space-y-3">
+                        <div class="text-center text-gray-400 py-8">
+                            <div class="text-4xl mb-2">👥</div>
+                            <p>Nenhum superusuário encontrado</p>
+                            <p class="text-sm">Use o formulário acima para criar um novo</p>
+                            <div class="mt-4 p-4 bg-gray-900 rounded-lg">
+                                <p class="text-sm text-yellow-400 mb-2">💡 Dica:</p>
+                                <p class="text-xs text-gray-400">Certifique-se de que o servidor Django está rodando</p>
+                                <p class="text-xs text-gray-400">E que o projeto Django está configurado corretamente</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Database Management Section -->
+            <div class="glass-effect rounded-xl p-8 mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="text-3xl mr-4">🗄️</div>
+                    <div>
+                        <h2 class="text-2xl font-bold">Gerenciamento do Banco</h2>
+                        <p class="text-gray-300">Operações de manutenção e controle</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-database mr-2"></i>Make Migrations
+                    </button>
+                    
+                    <button class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-sync mr-2"></i>Migrate
+                    </button>
+                    
+                    <button class="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-folder mr-2"></i>Collect Static
+                    </button>
+                </div>
+            </div>
+
+            <!-- Server Control Section -->
+            <div class="glass-effect rounded-xl p-8">
+                <div class="flex items-center mb-6">
+                    <div class="text-3xl mr-4">🚀</div>
+                    <div>
+                        <h2 class="text-2xl font-bold">Controle do Servidor</h2>
+                        <p class="text-gray-300">Iniciar, parar e monitorar o servidor Django</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <button class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-play mr-2"></i>Iniciar Servidor
+                        </button>
+                        
+                        <button class="w-full bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-stop mr-2"></i>Parar Servidor
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">Status do Servidor</h4>
+                            <div id="serverStatus" class="text-sm">
+                                <span class="text-yellow-400">⏳ Verificando...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">URL do Servidor</h4>
+                            <div class="text-sm text-emerald-400">
+                                http://localhost:8000
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-12 text-center text-gray-400 text-sm">
+            <p>Andromeda Galaxy - Backend Dashboard</p>
+            <p class="mt-1">Django + Python + SQLite/PostgreSQL</p>
+        </div>
+    </div>
+</body>
+</html>
