@@ -211,6 +211,27 @@ async function openBackendInNewTab() {
     }
 }
 
+// Função para abrir documentação do backend
+async function openBackendDocumentation() {
+    if (backendStatus) {
+        try {
+            console.log('📚 Tentando abrir documentação do backend...');
+            const result = await window.electronAPI.openInBrowser('http://localhost:8000/redoc/');
+            
+            if (result.success) {
+                showToast('📚 Documentação do backend aberta no navegador!', 'success');
+            } else {
+                showToast('❌ Erro ao abrir documentação: ' + result.message, 'error');
+            }
+        } catch (error) {
+            console.error('❌ Erro ao abrir documentação:', error);
+            showToast('❌ Erro ao abrir documentação: ' + error.message, 'error');
+        }
+    } else {
+        showToast('⚠️ Servidor backend não está rodando', 'warning');
+    }
+}
+
 // Função para iniciar todos os servidores
 async function startAllServers() {
     showToast('🚀 Iniciando todos os servidores...', 'info');
@@ -273,6 +294,120 @@ async function closeAllServers() {
     }
 }
 
+// Função para editar configuração do backend
+function editBackendConfig() {
+    const commandElement = document.getElementById('backendCommand');
+    const directoryElement = document.getElementById('backendDirectory');
+    
+    if (!commandElement || !directoryElement) return;
+    
+    // Criar inputs de edição
+    const commandInput = document.createElement('input');
+    commandInput.type = 'text';
+    commandInput.value = commandElement.textContent;
+    commandInput.className = 'bg-gray-800 text-blue-400 border border-gray-600 rounded px-2 py-1 text-xs w-full mb-2';
+    
+    const directoryInput = document.createElement('input');
+    directoryInput.type = 'text';
+    directoryInput.value = directoryElement.textContent;
+    directoryInput.className = 'bg-gray-800 text-gray-300 border border-gray-600 rounded px-2 py-1 text-xs w-full';
+    
+    // Criar botões de ação
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = '💾 Salvar';
+    saveBtn.className = 'bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs mt-2 mr-2';
+    
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '❌ Cancelar';
+    cancelBtn.className = 'bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs mt-2';
+    
+    // Substituir conteúdo
+    const container = commandElement.parentElement.parentElement;
+    const originalContent = container.innerHTML;
+    
+    container.innerHTML = '';
+    container.appendChild(commandInput);
+    container.appendChild(directoryInput);
+    container.appendChild(saveBtn);
+    container.appendChild(cancelBtn);
+    
+    // Event listeners
+    saveBtn.onclick = () => {
+        commandElement.textContent = commandInput.value;
+        directoryElement.textContent = directoryInput.value;
+        container.innerHTML = originalContent;
+        showToast('✅ Configuração do backend atualizada!', 'success');
+        
+        // Salvar no localStorage
+        localStorage.setItem('backendCommand', commandInput.value);
+        localStorage.setItem('backendDirectory', directoryInput.value);
+    };
+    
+    cancelBtn.onclick = () => {
+        container.innerHTML = originalContent;
+    };
+    
+    // Focar no primeiro input
+    commandInput.focus();
+}
+
+// Função para editar configuração do frontend
+function editFrontendConfig() {
+    const commandElement = document.getElementById('frontendCommand');
+    const directoryElement = document.getElementById('frontendDirectory');
+    
+    if (!commandElement || !directoryElement) return;
+    
+    // Criar inputs de edição
+    const commandInput = document.createElement('input');
+    commandInput.type = 'text';
+    commandInput.value = commandElement.textContent;
+    commandInput.className = 'bg-gray-800 text-blue-400 border border-gray-600 rounded px-2 py-1 text-xs w-full mb-2';
+    
+    const directoryInput = document.createElement('input');
+    directoryInput.type = 'text';
+    directoryInput.value = directoryElement.textContent;
+    directoryInput.className = 'bg-gray-800 text-gray-300 border border-gray-600 rounded px-2 py-1 text-xs w-full';
+    
+    // Criar botões de ação
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = '💾 Salvar';
+    saveBtn.className = 'bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs mt-2 mr-2';
+    
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = '❌ Cancelar';
+    cancelBtn.className = 'bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs mt-2';
+    
+    // Substituir conteúdo
+    const container = commandElement.parentElement.parentElement;
+    const originalContent = container.innerHTML;
+    
+    container.innerHTML = '';
+    container.appendChild(commandInput);
+    container.appendChild(directoryInput);
+    container.appendChild(saveBtn);
+    container.appendChild(cancelBtn);
+    
+    // Event listeners
+    saveBtn.onclick = () => {
+        commandElement.textContent = commandInput.value;
+        directoryElement.textContent = directoryInput.value;
+        container.innerHTML = originalContent;
+        showToast('✅ Configuração do frontend atualizada!', 'success');
+        
+        // Salvar no localStorage
+        localStorage.setItem('frontendCommand', commandInput.value);
+        localStorage.setItem('frontendDirectory', directoryInput.value);
+    };
+    
+    cancelBtn.onclick = () => {
+        container.innerHTML = originalContent;
+    };
+    
+    // Focar no primeiro input
+    commandInput.focus();
+}
+
 // Exportar funções para uso global
 window.startBackendServer = startBackendServer;
 window.stopBackendServer = stopBackendServer;
@@ -281,13 +416,50 @@ window.stopFrontendDev = stopFrontendDev;
 window.checkServerStatus = checkServerStatus;
 window.openFrontendInNewTab = openFrontendInNewTab;
 window.openBackendInNewTab = openBackendInNewTab;
+window.openBackendDocumentation = openBackendDocumentation;
 window.startAllServers = startAllServers;
 window.stopAllServers = stopAllServers;
 window.openAllServers = openAllServers;
 window.closeAllServers = closeAllServers;
+window.editBackendConfig = editBackendConfig;
+window.editFrontendConfig = editFrontendConfig;
+
+// Função para carregar configurações salvas
+function loadSavedConfigurations() {
+    // Carregar configurações do backend
+    const savedBackendCommand = localStorage.getItem('backendCommand');
+    const savedBackendDirectory = localStorage.getItem('backendDirectory');
+    
+    if (savedBackendCommand) {
+        const commandElement = document.getElementById('backendCommand');
+        if (commandElement) commandElement.textContent = savedBackendCommand;
+    }
+    
+    if (savedBackendDirectory) {
+        const directoryElement = document.getElementById('backendDirectory');
+        if (directoryElement) directoryElement.textContent = savedBackendDirectory;
+    }
+    
+    // Carregar configurações do frontend
+    const savedFrontendCommand = localStorage.getItem('frontendCommand');
+    const savedFrontendDirectory = localStorage.getItem('frontendDirectory');
+    
+    if (savedFrontendCommand) {
+        const commandElement = document.getElementById('frontendCommand');
+        if (commandElement) commandElement.textContent = savedFrontendCommand;
+    }
+    
+    if (savedFrontendDirectory) {
+        const directoryElement = document.getElementById('frontendDirectory');
+        if (directoryElement) directoryElement.textContent = savedFrontendDirectory;
+    }
+}
 
 // Verificar status inicial quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
+    // Carregar configurações salvas
+    loadSavedConfigurations();
+    
     setTimeout(checkServerStatus, 1000); // Verificar após 1 segundo
     
     // Verificar status a cada 10 segundos
